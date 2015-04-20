@@ -56,7 +56,7 @@ public class FlyAviator : MonoBehaviour {
         shadow.color = new Color(1f, 1f, 1f, 1f);
         eyes.sprite = eyesRed;
 
-        float difficulty = player.position.x / 50;
+        float difficulty = player.position.x / 35;
         speed = 0.7f + 0.1f * difficulty;
         viewRange = 2.5f + 0.1f * difficulty;
         maxHealth = Random.Range(0.4f, 0.7f + 0.1f * difficulty);
