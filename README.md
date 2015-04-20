@@ -7,7 +7,7 @@ Keep your health above zero, it's a good idea to keep your energy level above ze
 ######Controls
 Arrow Keys or AD for movement to right or left
 Space to jump
-Mouse to point flashligh
+Mouse (up or down) to rotate flashligh
 
 ####Tools used:
 - Unity3D 5

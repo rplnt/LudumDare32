@@ -11,6 +11,7 @@ public class FlyAviator : MonoBehaviour {
     public Sprite flyYellow;
 
     Transform player;
+    CharController cController;
 
     public bool agro;
     float deadTimer;
@@ -39,6 +40,7 @@ public class FlyAviator : MonoBehaviour {
         shadow = transform.FindChild("Shadow").GetComponent<SpriteRenderer>();
         eyes = transform.FindChild("Eyes").GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        cController = player.GetComponent<CharController>();
     }
 
 
@@ -68,6 +70,7 @@ public class FlyAviator : MonoBehaviour {
 	
 
 	void Update () {
+        if (cController.paused) return;
         Vector3 body = player.position + playerOffset;
 
         if (idle && Vector2.Distance(body, transform.position) < viewRange) {
@@ -122,6 +125,7 @@ public class FlyAviator : MonoBehaviour {
 
 
     void OnTriggerStay2D(Collider2D coll) {
+        if (cController.paused) return;
         if (!agro) return;
 
         if (coll.gameObject.name == "LightCone") {

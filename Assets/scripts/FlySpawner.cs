@@ -26,7 +26,7 @@ public class FlySpawner : MonoBehaviour {
             fly.Spawn(new Vector2(position, Random.Range(-1, 2)));
             fliesSpawnedTotal++;
             if (fliesSpawnedTotal % 10 == 0) {
-                Debug.Log(fliesSpawnedTotal);
+                //Debug.Log(fliesSpawnedTotal);
             }
         }
 	}

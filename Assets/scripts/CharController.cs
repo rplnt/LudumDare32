@@ -14,6 +14,7 @@ public class CharController : MonoBehaviour {
     SpriteRenderer self;
 
     bool over = false;
+    public bool paused = true;
 
     bool flickering = false;
 
@@ -77,14 +78,14 @@ public class CharController : MonoBehaviour {
         ui = canvas.GetComponent<UIController>();
         ui.InitUI(health, energy, 0);
 
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         Invoke("TurnThatStupidLightOnWithoutParameters", 3);
 	}
 
 
     void FixedUpdate() {
-        if (over) return;
+        if (over || paused) return;
 
         /* move left/right */
         float input = 0.0f;
@@ -111,13 +112,24 @@ public class CharController : MonoBehaviour {
 
         /* rotate flashlight */
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector2(500, Input.mousePosition.y));
         float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         angle = Mathf.Clamp(angle - 15, -45, 60);
         flashlight.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    public void togglePause() {
+        ui.TogglePause();
+        paused = !paused;
+    }
+
 
 	void Update () {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            togglePause();
+        }
+        if (paused) return;
+
         if (over) {
             if (transform.localScale.y > 0) {
                 transform.localScale = new Vector3(1, transform.localScale.y - 0.8f * Time.deltaTime, 1);

@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour {
 
 
     void Start() {
-        Invoke("hideIntro", 4f);
+        //Invoke("HideIntro", 4f);
     }
 
 
@@ -58,8 +58,12 @@ public class UIController : MonoBehaviour {
     }
 
 
-    void hideIntro() {
+    void HideIntro() {
         intro.SetActive(false);
+    }
+
+    public void TogglePause() {
+        intro.SetActive(!intro.activeSelf);
     }
 
 }
