@@ -18,10 +18,12 @@ public class Cleaner : MonoBehaviour {
 
     Dictionary<GameObject, GameObject> foliageData;
 
+
     void Start() {
         foliageData = new Dictionary<GameObject, GameObject>();
         rnd = new System.Random();
     }
+
 
 	void OnTriggerExit2D(Collider2D coll) {
         if (coll.gameObject.tag == "Ground") {
@@ -32,11 +34,14 @@ public class Cleaner : MonoBehaviour {
             coll.transform.position = new Vector3(coll.transform.position.x + (starfieldCount * starfieldWidth), coll.transform.position.y);
         } else if (coll.gameObject.tag == "Cloud") {
             RecycleCloud(coll.gameObject);
+        } else if (coll.gameObject.tag == "Enemy") {
+            coll.gameObject.Recycle();
         } else {
             Debug.LogWarning(coll.gameObject.name);
             Destroy(coll.gameObject);
         }
     }
+
 
     void RecycleFoliage(GameObject ground) {
         if (foliageData.ContainsKey(ground)) {
@@ -50,6 +55,7 @@ public class Cleaner : MonoBehaviour {
             foliageData.Add(ground, newFoliage);
         }
     }
+
 
     void RecycleCloud(GameObject cloud) {
         SpriteRenderer renderer = cloud.GetComponent<SpriteRenderer>();

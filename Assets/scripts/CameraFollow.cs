@@ -9,11 +9,13 @@ public class CameraFollow : MonoBehaviour {
     public GameObject starfield;
     public GameObject clouds;
 
+
 	void Start () {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         player = go.transform;
 	}
-	
+
+
 	void Update () {
         if (player.position.x + offset > transform.position.x) {
             float newPos = player.position.x + offset;
@@ -22,4 +24,5 @@ public class CameraFollow : MonoBehaviour {
             transform.position = new Vector3(newPos, transform.position.y, transform.position.z);
         }
 	}
+
 }
